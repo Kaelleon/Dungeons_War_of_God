@@ -5,7 +5,6 @@ public class ShootModeSwitcher : MonoBehaviour
 {
     [Header("Modos (arrastra los scripts del jugador)")]
     [SerializeField] private ShootOnClick clickMode;      // tecla 1
-    [SerializeField] private ShootAimMouse aimMode;       // tecla 2
     [SerializeField] private ShootProximity proximityMode; // tecla 3
 
     [SerializeField] private int startMode = 1;
@@ -15,7 +14,7 @@ public class ShootModeSwitcher : MonoBehaviour
 
     private void Awake()
     {
-        modes = new ShooterBase[] { clickMode, aimMode, proximityMode };
+        modes = new ShooterBase[] { clickMode, proximityMode };
     }
 
     private void Start()
@@ -29,8 +28,6 @@ public class ShootModeSwitcher : MonoBehaviour
 
         if (Keyboard.current.digit1Key.wasPressedThisFrame || Keyboard.current.numpad1Key.wasPressedThisFrame)
             SetMode(1);
-        else if (Keyboard.current.digit2Key.wasPressedThisFrame || Keyboard.current.numpad2Key.wasPressedThisFrame)
-            SetMode(2);
         else if (Keyboard.current.digit3Key.wasPressedThisFrame || Keyboard.current.numpad3Key.wasPressedThisFrame)
             SetMode(3);
     }

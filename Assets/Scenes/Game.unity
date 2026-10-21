@@ -494,11 +494,8 @@ GameObject:
   - component: {fileID: 644047098}
   - component: {fileID: 644047102}
   - component: {fileID: 644047101}
-  - component: {fileID: 644047097}
   - component: {fileID: 644047096}
-  - component: {fileID: 644047095}
   - component: {fileID: 644047100}
-  - component: {fileID: 644047103}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -506,38 +503,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &644047095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644047094}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fe2ac7c0e755804a9929b51d0089b6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShootAimMouse
-  bulletPrefab: {fileID: 7567341414810703793, guid: b44ed1dd1fa64344b95c5fda9ddbf8fd, type: 3}
-  firePoint: {fileID: 2035261736}
-  fireRate: 0.3
-  weaponPivot: {fileID: 0}
 --- !u!114 &644047096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644047094}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b84bcb522137aaa43b5e8160c14d90d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShootOnClick
-  bulletPrefab: {fileID: 7567341414810703793, guid: b44ed1dd1fa64344b95c5fda9ddbf8fd, type: 3}
-  firePoint: {fileID: 2035261736}
-  fireRate: 0.3
---- !u!114 &644047097
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -546,16 +512,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 644047094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9ccb6740d96daa48be83552354540df, type: 3}
+  m_Script: {fileID: 11500000, guid: b84bcb522137aaa43b5e8160c14d90d6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShootProximity
+  m_EditorClassIdentifier: Assembly-CSharp::ShootOnClick
   bulletPrefab: {fileID: 7567341414810703793, guid: b44ed1dd1fa64344b95c5fda9ddbf8fd, type: 3}
   firePoint: {fileID: 2035261736}
   fireRate: 0.3
-  detectionRadius: 11
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!212 &644047098
 SpriteRenderer:
   serializedVersion: 2
@@ -717,22 +679,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &644047103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644047094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84358bee62a6afe439d279ada5d4f166, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShootModeSwitcher
-  clickMode: {fileID: 644047096}
-  aimMode: {fileID: 644047095}
-  proximityMode: {fileID: 644047097}
-  startMode: 1
 --- !u!1 &2035261735
 GameObject:
   m_ObjectHideFlags: 0
