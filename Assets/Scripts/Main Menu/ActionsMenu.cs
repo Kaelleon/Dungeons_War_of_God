@@ -5,7 +5,7 @@ public class ActionsMenu : MonoBehaviour
 {
     public void Jugar()
     {
-        SceneManager.LoadScene("Characters");
+        SceneManager.LoadScene("CharacterSelect");
     }
 
     public void Records()

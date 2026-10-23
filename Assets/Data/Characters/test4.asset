@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2214c698dad4e3041a7a95d2f171fc46, type: 3}
+  m_Name: test4
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  characterName: test4
+  characterClass: Soporte
+  portrait: {fileID: 8957324059118975939, guid: 196363095fcd4ff4cabf7d1307e875d2, type: 3}
+  fullBody: {fileID: 3218353051568008401, guid: bf10df1b5f42e1f4cae1f2d17b6e4f4f, type: 3}
+  maxHealth: 100
+  defensePercent: 15
+  moveSpeedMultiplier: 1.1
+  attackPoints: 40
+  attackSpeedMultiplier: 1
+  evasionMultiplier: 1
+  abilities:
+  - {fileID: 11400000, guid: c55e7e84e155f68438b18aae7c11fb28, type: 2}
+  - {fileID: 11400000, guid: 124cc10be42d03644aaca929a076766a, type: 2}
+  - {fileID: 11400000, guid: 88eca17896250fd4890a84d8944c6d96, type: 2}
