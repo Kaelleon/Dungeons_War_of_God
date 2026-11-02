@@ -8,6 +8,13 @@ public class ArcadeGameLoop : MonoBehaviour
 {
     public enum GamePhase { Fase1, Fase2, Climax, Jefe, GameOver }
 
+    [Header("Estadísticas de la partida")]
+    public int totalKills = 0;
+    public int bossesDefeated = 0;
+    public int maxCombo = 1;
+    public float timeSurvived = 0f;
+    public int difficultyLevel = 0; //sube con cada jefe derrotado; el Spawner puede usarlo
+
     [Header("Estado de Partida")]
     public GamePhase currentPhase = GamePhase.Fase1;
     public int currentScore = 0;
@@ -31,17 +38,18 @@ public class ArcadeGameLoop : MonoBehaviour
     public event Action<GamePhase> OnPhaseChanged;
     public event Action OnBossSpawnRequested;
 
-    private void Start()
-    {
-        StartGame();
-    }
-
     public void StartGame()
     {
+        StopAllCoroutines(); // evita duplicar la corrutina de puntos por tiempo
         isGameActive = true;
         currentPhase = GamePhase.Fase1;
         currentScore = 0;
         killCount = 0;
+        totalKills = 0;
+        bossesDefeated = 0;
+        maxCombo = 1;
+        timeSurvived = 0f;
+        difficultyLevel = 0;
         ResetCombo();
 
         // Iniciamos la corrutina que da puntos por tiempo
@@ -49,11 +57,13 @@ public class ArcadeGameLoop : MonoBehaviour
 
         // Avisamos a cualquier script que la fase cambió
         OnPhaseChanged?.Invoke(currentPhase);
+        OnScoreUpdated?.Invoke(currentScore);
     }
 
     private void Update()
     {
         if (!isGameActive) return;
+        timeSurvived += Time.deltaTime;
 
         //Si pasa mucho tiempo sin matar, el combo vuelve a x1
         if (comboMultiplier > 1 && Time.time - lastKillTime > COMBO_TIMEOUT)
@@ -85,6 +95,7 @@ public class ArcadeGameLoop : MonoBehaviour
             AddScore(100 * comboMultiplier); // 100 puntos base multiplicados por el combo actual
             IncreaseCombo();
             killCount++; // Aumentamos el contador para saber cuándo cambiar de fase de oleadas
+            totalKills++;
             CheckPhaseProgression();
         }
     }
@@ -110,6 +121,7 @@ public class ArcadeGameLoop : MonoBehaviour
             comboMultiplier++;
             OnComboUpdated?.Invoke(comboMultiplier);
         }
+        maxCombo = Mathf.Max(maxCombo, comboMultiplier);
     }
 
     private void ResetCombo()
@@ -140,6 +152,8 @@ public class ArcadeGameLoop : MonoBehaviour
 
     private void DefeatBoss()
     {
+        bossesDefeated++; 
+        difficultyLevel++;
         // Al derrotar al jefe, reiniciamos el conteo y volvemos a la Fase 1.
         killCount = 0;
         AdvancePhase(GamePhase.Fase1);
@@ -148,6 +162,7 @@ public class ArcadeGameLoop : MonoBehaviour
     // Se llama cuando la vida del Campeón llega a 0
     public void TriggerGameOver()
     {
+        if (!isGameActive) return; //evita llamarlo dos veces
         isGameActive = false;
         currentPhase = GamePhase.GameOver;
         StopAllCoroutines(); // Detiene la suma de puntos por supervivencia
@@ -155,4 +170,22 @@ public class ArcadeGameLoop : MonoBehaviour
 
         // Aquí deberíamos guardar el currentScore como High Score en PlayerPrefs o enviarlo al gestor de guardado.
     }
+
+    public GameResult BuildResult() => new GameResult
+    {
+        score = currentScore,
+        kills = totalKills,
+        bossesDefeated = bossesDefeated,
+        maxCombo = maxCombo,
+        timeSurvived = timeSurvived
+    };
+}
+
+public struct GameResult
+{
+    public int score;
+    public int kills;
+    public int bossesDefeated;
+    public int maxCombo;
+    public float timeSurvived;
 }

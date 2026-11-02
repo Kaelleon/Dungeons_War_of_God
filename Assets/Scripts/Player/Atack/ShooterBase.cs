@@ -10,12 +10,15 @@ public abstract class ShooterBase : MonoBehaviour
 
     private float nextFireTime;
 
-    protected bool CanShoot => Time.time >= nextFireTime;
+    public static bool AttacksEnabled = true;  
+    public float AttackSpeedMultiplier { get; set; } = 1f;
+    protected bool CanShoot => AttacksEnabled && Time.time >= nextFireTime;
+
 
     protected void Shoot(Vector2 direction)
     {
         if (!CanShoot) return;
-        nextFireTime = Time.time + fireRate;
+        nextFireTime = Time.time + fireRate / Mathf.Max(0.1f, AttackSpeedMultiplier);
 
         Bullet bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         bullet.Launch(direction);

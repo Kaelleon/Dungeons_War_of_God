@@ -15,8 +15,10 @@ public class ActionsMenu : MonoBehaviour
 
     public void Salir()
     {
-        Debug.Log("Saliendo...");
-        UnityEditor.EditorApplication.isPlaying = false;
-        Application.Quit();
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }
