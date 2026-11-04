@@ -53,10 +53,10 @@ public class PlayerHealth : MonoBehaviour
     }
 
     // Temporal: daño por contacto hasta que los enemigos tengan su propio script
-    private void OnCollisionStay2D(Collision2D other)
-    {
-        if (other.collider.CompareTag("Enemy")) TakeDamage(10);
-    }
+    //private void OnCollisionStay2D(Collision2D other)
+    //{
+      //  if (other.collider.CompareTag("Enemy")) TakeDamage(10);
+    //}
 
 #if UNITY_EDITOR
     private void Update()

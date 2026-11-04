@@ -29,7 +29,9 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            // other.GetComponent<EnemyHealth>()?.TakeDamage(damage);
+            Vector2 hitDirection = rb.linearVelocity.normalized;
+            other.GetComponent<EnemyHealth>()?.TakeDamage(damage, hitDirection);
+
             Destroy(gameObject);
         }
     }
