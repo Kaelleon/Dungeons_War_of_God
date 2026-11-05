@@ -5,13 +5,18 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 12f;
     [SerializeField] private float lifeTime = 3f;
-    [SerializeField] private int damage = 1;
 
+    private int currentDamage = 1;
     private Rigidbody2D rb;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void Setup(int damageAmount)
+    {
+        currentDamage = damageAmount;
     }
 
     public void Launch(Vector2 direction)
@@ -30,7 +35,7 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             Vector2 hitDirection = rb.linearVelocity.normalized;
-            other.GetComponent<EnemyHealth>()?.TakeDamage(damage, hitDirection);
+            other.GetComponent<EnemyHealth>()?.TakeDamage(currentDamage, hitDirection);
 
             Destroy(gameObject);
         }
