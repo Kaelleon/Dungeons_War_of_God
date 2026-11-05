@@ -19,4 +19,9 @@ public class CharacterData : ScriptableObject
 
     [Header("Abilities")]
     public AbilityData[] abilities = new AbilityData[3];
+
+    [Header("In-Game")]
+    public Sprite gameSprite;                            // sprite del campeón en la arena (si no usas animaciones)
+    public RuntimeAnimatorController animatorController; // opcional: animaciones de este dios
+    public GameObject godPrefab;                         // opcional: efectos o habilidades propias del dios
 }

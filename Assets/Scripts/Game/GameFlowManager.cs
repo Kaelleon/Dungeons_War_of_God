@@ -20,6 +20,7 @@ public class GameFlowManager : MonoBehaviour
     [SerializeField] private float deathSlowMoSeconds = 1.2f;
     [SerializeField] private string menuScene = "Menu";
     [SerializeField] private string characterSelectScene = "CharacterSelect";
+    [SerializeField] private PlayerVisuals playerVisuals;
 
     public GameState State { get; private set; } = GameState.Countdown;
 
@@ -50,7 +51,9 @@ public class GameFlowManager : MonoBehaviour
 
     private void ApplyCharacterStats(CharacterData data)
     {
+        playerVisuals.Apply(data); 
         playerHealth.Initialize(data);
+
         playerMovement.SpeedMultiplier = data.moveSpeedMultiplier;
 
         PlayerDash dash = playerMovement.GetComponent<PlayerDash>();

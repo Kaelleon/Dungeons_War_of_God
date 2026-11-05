@@ -15,4 +15,4 @@ MonoBehaviour:
   abilityName: Martillazo
   description: "Invoca un rayo que cae sobre el enemigo m\xE1s cercano, le inflige
     da\xF1o y lo aturde durante 2 segundos."
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 6989642852348889387, guid: 0c02c91c291763243bc4ad8a2ef21008, type: 3}

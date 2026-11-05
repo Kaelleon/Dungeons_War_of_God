@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2214c698dad4e3041a7a95d2f171fc46, type: 3}
-  m_Name: test3
+  m_Name: Loki
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  characterName: test3
+  characterName: Loki
   characterClass: Asesino
-  portrait: {fileID: 8957324059118975939, guid: 196363095fcd4ff4cabf7d1307e875d2, type: 3}
-  fullBody: {fileID: -8296385383580801948, guid: bf10df1b5f42e1f4cae1f2d17b6e4f4f, type: 3}
+  portrait: {fileID: 6989642852348889387, guid: 0c02c91c291763243bc4ad8a2ef21008, type: 3}
+  fullBody: {fileID: -1509966652741187204, guid: 2cc1591805c2fe04ba0c1e895125d682, type: 3}
   maxHealth: 90
   defensePercent: 10
   moveSpeedMultiplier: 1.5
@@ -26,3 +26,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c55e7e84e155f68438b18aae7c11fb28, type: 2}
   - {fileID: 11400000, guid: 124cc10be42d03644aaca929a076766a, type: 2}
   - {fileID: 11400000, guid: 88eca17896250fd4890a84d8944c6d96, type: 2}
+  gameSprite: {fileID: -1509966652741187204, guid: 2cc1591805c2fe04ba0c1e895125d682, type: 3}
+  animatorController: {fileID: 0}
+  godPrefab: {fileID: 0}
