@@ -53,8 +53,14 @@ public class GameFlowManager : MonoBehaviour
         playerHealth.Initialize(data);
         playerMovement.SpeedMultiplier = data.moveSpeedMultiplier;
 
+        PlayerDash dash = playerMovement.GetComponent<PlayerDash>();
+        if (dash != null) dash.EvasionMultiplier = data.evasionMultiplier;
+
         foreach (ShooterBase shooter in playerMovement.GetComponentsInChildren<ShooterBase>(true))
+        {
             shooter.AttackSpeedMultiplier = data.attackSpeedMultiplier;
+            shooter.AttackDamage = data.attackPoints;
+        }
         //attackPoints (daño de Bullet) y evasionMultiplier (dash) se conectan cuando existan esos sistemas
     }
 
