@@ -23,7 +23,7 @@ MonoBehaviour:
   attackSpeedMultiplier: 0.7
   evasionMultiplier: 0.5
   abilities:
-  - {fileID: 11400000, guid: c55e7e84e155f68438b18aae7c11fb28, type: 2}
+  - {fileID: 11400000, guid: 48e854b425da0e346bda6ecc3a02605a, type: 2}
   - {fileID: 11400000, guid: 124cc10be42d03644aaca929a076766a, type: 2}
   - {fileID: 11400000, guid: 88eca17896250fd4890a84d8944c6d96, type: 2}
   gameSprite: {fileID: -1577242008496935070, guid: 6a8add139eb7f6b4e981fbc9da8410ca, type: 3}
