@@ -35,9 +35,24 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             Vector2 hitDirection = rb.linearVelocity.normalized;
-            other.GetComponent<EnemyHealth>()?.TakeDamage(currentDamage, hitDirection);
 
-            Destroy(gameObject);
+            // 1. Intenta dañar a un enemigo normal
+            EnemyHealth normalEnemy = other.GetComponent<EnemyHealth>();
+            if (normalEnemy != null)
+            {
+                normalEnemy.TakeDamage(currentDamage, hitDirection);
+            }
+            else
+            {
+                // 2. Si no es un enemigo normal, intenta dañar al Jefe
+                BossHealth boss = other.GetComponent<BossHealth>();
+                if (boss != null)
+                {
+                    boss.TakeDamage(currentDamage, hitDirection);
+                }
+            }
+
+            Destroy(gameObject); // La bala se destruye al impactar con cualquier "Enemy"
         }
     }
 }

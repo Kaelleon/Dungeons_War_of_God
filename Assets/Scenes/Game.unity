@@ -729,7 +729,7 @@ MonoBehaviour:
   hunterPrefab: {fileID: 2846564975877068431, guid: 2c7b4f6c1c23f0748a5b1c0cf7097144, type: 3}
   shooterPrefab: {fileID: 2846564975877068431, guid: 2c7b4f6c1c23f0748a5b1c0cf7097144, type: 3}
   tankPrefab: {fileID: 2846564975877068431, guid: 2c7b4f6c1c23f0748a5b1c0cf7097144, type: 3}
-  bossPrefab: {fileID: 2846564975877068431, guid: 2c7b4f6c1c23f0748a5b1c0cf7097144, type: 3}
+  bossPrefab: {fileID: 629176394557327235, guid: 95f48f9702efa3840a67751cd6489a33, type: 3}
 --- !u!4 &401194122
 Transform:
   m_ObjectHideFlags: 0
@@ -1476,6 +1476,8 @@ GameObject:
   - component: {fileID: 644047100}
   - component: {fileID: 644047103}
   - component: {fileID: 644047104}
+  - component: {fileID: 644047105}
+  - component: {fileID: 644047106}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1688,6 +1690,34 @@ MonoBehaviour:
   dashBaseSpeed: 15
   dashDuration: 0.2
   dashBaseCooldown: 2
+--- !u!114 &644047105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644047094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9243c5383c8ebe04aa174ea2fc2028d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAbilities
+--- !u!114 &644047106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644047094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fbddb5422ec7224499a6653e6a8af0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
+  interactionRadius: 1.5
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &649078748
 GameObject:
   m_ObjectHideFlags: 0
