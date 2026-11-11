@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 [RequireComponent(typeof(PlayerMovement))]
 public class PlayerAbilities : MonoBehaviour
@@ -7,6 +8,15 @@ public class PlayerAbilities : MonoBehaviour
     private readonly AbilityLogic[] abilities = new AbilityLogic[3];
     private readonly float[] nextAvailableTimes = new float[3];
     private PlayerMovement movement;
+    public event Action OnAbilitiesChanged;   //Setup terminó: el HUD se redibuja
+    public event Action<int> OnAbilityUsed;   //índice de la habilidad usada
+
+    public AbilityLogic GetAbility(int index) =>
+        index >= 0 && index < abilities.Length ? abilities[index] : null;
+
+    //Segundos que faltan para poder usarla (0 = lista)
+    public float GetCooldownRemaining(int index) =>
+        index >= 0 && index < abilities.Length ? Mathf.Max(0f, nextAvailableTimes[index] - Time.time) : 0f;
 
     private void Awake()
     {
@@ -30,6 +40,8 @@ public class PlayerAbilities : MonoBehaviour
             if (data != null && abilities[i] == null)
                 Debug.LogWarning("'" + data.abilityName + "' no tiene lógica de combate todavía.");
         }
+
+        OnAbilitiesChanged?.Invoke();
     }
 
     private void Update()
@@ -50,5 +62,7 @@ public class PlayerAbilities : MonoBehaviour
 
         abilities[index].Activate(transform);
         nextAvailableTimes[index] = Time.time + abilities[index].cooldown;
+
+        OnAbilityUsed?.Invoke(index);
     }
 }

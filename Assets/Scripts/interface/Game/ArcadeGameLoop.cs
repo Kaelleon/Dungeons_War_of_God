@@ -22,7 +22,7 @@ public class ArcadeGameLoop : MonoBehaviour
 
     [Header("Sistema de Combos")]
     public int comboMultiplier = 1;
-    private const int MAX_COMBO = 10;
+    public const int MAX_COMBO = 10;
     private const float COMBO_TIMEOUT = 3f;
     private float lastKillTime = 0f;
 
@@ -37,6 +37,9 @@ public class ArcadeGameLoop : MonoBehaviour
     public event Action<int> OnComboUpdated;
     public event Action<GamePhase> OnPhaseChanged;
     public event Action OnBossSpawnRequested;
+    public event Action<int> OnComboHit;
+
+    public float ComboTimeNormalized => comboMultiplier > 1 ? Mathf.Clamp01(1f - (Time.time - lastKillTime) / COMBO_TIMEOUT) : 0f;
 
     public void StartGame()
     {
@@ -122,6 +125,7 @@ public class ArcadeGameLoop : MonoBehaviour
             OnComboUpdated?.Invoke(comboMultiplier);
         }
         maxCombo = Mathf.Max(maxCombo, comboMultiplier);
+        OnComboHit?.Invoke(comboMultiplier); // Dispara el evento para que el HUD muestre la animación de combo
     }
 
     private void ResetCombo()

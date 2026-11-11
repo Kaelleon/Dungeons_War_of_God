@@ -46,13 +46,13 @@ public class GameFlowUI : MonoBehaviour
 
     public void ShowGameOver(GameResult r, int previousBest, bool isNewRecord)
     {
-        finalScoreText.text = "Puntaje: " + r.score.ToString("N0");
-        bestScoreText.text = "MEJOR: " + Mathf.Max(previousBest, r.score).ToString("N0");
+        finalScoreText.text = "Puntaje:" + r.score.ToString("N0");
+        bestScoreText.text = "MEJOR:" + Mathf.Max(previousBest, r.score).ToString("N0");
         newRecordLabel.SetActive(isNewRecord);
-        statsText.text = "Tiempo   " + FormatTime(r.timeSurvived) + "\n"
-                       + "Bajas   " + r.kills + "\n"
-                       + "Jefes derrotados   " + r.bossesDefeated + "\n"
-                       + "Combo máximo   x" + r.maxCombo;
+        statsText.text = "Tiempo " + FormatTime(r.timeSurvived) + "\n"
+                       + "Bajas:" + r.kills + "\n"
+                       + "Jefes derrotados:" + r.bossesDefeated + "\n"
+                       + "Combo máximo: x" + r.maxCombo;
 
         gameOverGroup.gameObject.SetActive(true);
         StartCoroutine(GameOverFadeIn());
