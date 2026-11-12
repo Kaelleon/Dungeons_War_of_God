@@ -22,6 +22,25 @@ public class CharacterInfoPanel : MonoBehaviour
     [SerializeField] private TMP_Text attackSpeedText;
     [SerializeField] private TMP_Text evasionText;
 
+    [Header("Confirmación")]
+    [SerializeField] private TMP_Text confirmText;
+
+    private bool isLocked;
+    private void Awake() => confirmText.gameObject.SetActive(false);
+
+    public void SetLocked(bool locked)
+    {
+        isLocked = locked;
+        confirmText.gameObject.SetActive(locked);
+    }
+
+    private void Update()
+    {
+        if (!isLocked) return;
+        //Parpadeo suave para que se note que hay que confirmar
+        confirmText.alpha = Mathf.Lerp(0.55f, 1f, (Mathf.Sin(Time.unscaledTime * 5f) + 1f) * 0.5f);
+    }
+
     public void Show(CharacterData data)
     {
         nameText.text = data.characterName;

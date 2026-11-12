@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class CharacterSelectController : MonoBehaviour
@@ -15,8 +16,13 @@ public class CharacterSelectController : MonoBehaviour
     [SerializeField] private Transform gridContent;
     [SerializeField] private CharacterInfoPanel infoPanel;
 
+    [Header("Confirmación")]
+    [SerializeField] private float confirmDelay = 0.25f; // evita que un doble click bloquee y confirme a la vez
+
     private readonly List<CharacterSlotUI> slots = new List<CharacterSlotUI>();
     private GameObject lastSelected;
+    private CharacterSlotUI lockedSlot;   // null = navegando libremente
+    private float lockedAt;
     private bool isLoading;
 
     private void Start()
@@ -30,7 +36,7 @@ public class CharacterSelectController : MonoBehaviour
         foreach (CharacterData data in characters)
         {
             CharacterSlotUI slot = Instantiate(slotPrefab, gridContent);
-            slot.Setup(data, OnCharacterHighlighted, OnCharacterConfirmed);
+            slot.Setup(data, OnCharacterHighlighted, OnCharacterPressed);
             slots.Add(slot);
         }
     }
@@ -56,18 +62,60 @@ public class CharacterSelectController : MonoBehaviour
         else if (lastSelected != null && lastSelected.activeInHierarchy)
             // Si se perdió la selección (click en vacío), la recuperamos
             EventSystem.current.SetSelectedGameObject(lastSelected);
+
+        // Escape suelta el personaje bloqueado
+        if (lockedSlot != null && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+            Unlock();
     }
 
     private void OnCharacterHighlighted(CharacterData data)
     {
+        if (lockedSlot != null) return; // bloqueado: el panel no cambia de personaje
         infoPanel.Show(data);
     }
 
-    private void OnCharacterConfirmed(CharacterData data)
+    // Click o Enter sobre un slot
+    private void OnCharacterPressed(CharacterSlotUI slot)
     {
         if (isLoading) return;
-        isLoading = true;
 
+        if (lockedSlot == null)
+        {
+            Lock(slot);
+        }
+        else if (slot == lockedSlot && Time.unscaledTime - lockedAt >= confirmDelay)
+        {
+            Confirm(slot.Data);
+        }
+    }
+
+    private void Lock(CharacterSlotUI slot)
+    {
+        lockedSlot = slot;
+        lockedAt = Time.unscaledTime;
+
+        infoPanel.Show(slot.Data);
+        infoPanel.SetLocked(true);
+        foreach (CharacterSlotUI s in slots) s.SetLockState(s == slot, true);
+
+        EventSystem.current.SetSelectedGameObject(slot.gameObject);
+    }
+
+    private void Unlock()
+    {
+        CharacterSlotUI slot = lockedSlot;
+        lockedSlot = null;
+
+        infoPanel.SetLocked(false);
+        foreach (CharacterSlotUI s in slots) s.SetLockState(false, false);
+
+        // El foco vuelve al slot que estaba bloqueado
+        EventSystem.current.SetSelectedGameObject(slot.gameObject);
+    }
+
+    private void Confirm(CharacterData data)
+    {
+        isLoading = true;
         GameSession.SelectedCharacter = data;
         SceneManager.LoadScene(gameSceneName);
     }
