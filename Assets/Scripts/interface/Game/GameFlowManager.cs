@@ -67,6 +67,21 @@ public class GameFlowManager : MonoBehaviour
             shooter.AttackDamage = data.attackPoints;
         }
         //attackPoints (daño de Bullet) y evasionMultiplier (dash) se conectan cuando existan esos sistemas
+
+        // El ataque cuerpo a cuerpo recibe daño y velocidad del personaje
+        MeleeAttack melee = playerMovement.GetComponentInChildren<MeleeAttack>(true);
+        if (melee != null)
+        {
+            melee.AttackSpeedMultiplier = data.attackSpeedMultiplier;
+            melee.AttackDamage = data.attackPoints;
+        }
+
+        // Cada personaje usa melee o disparo a distancia según su estilo
+        bool usesRanged = data.attackStyle == AttackStyle.Ranged;
+        if (melee != null) melee.enabled = !usesRanged;
+
+        ShootOnClick rangedShooter = playerMovement.GetComponentInChildren<ShootOnClick>(true);
+        if (rangedShooter != null) rangedShooter.enabled = usesRanged;
     }
 
     private void SetPlayerControl(bool enabled)

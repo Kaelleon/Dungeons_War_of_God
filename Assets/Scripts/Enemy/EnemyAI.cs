@@ -4,14 +4,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyAI : MonoBehaviour
 {
-    public enum EnemyState { Spawning, Chasing, Stunned }
+    public enum EnemyState { Spawning, Chasing, Stunned, Attacking }
 
     [Header("Estado Actual")]
     public EnemyState currentState = EnemyState.Spawning;
 
     [Header("Estadísticas")]
     public float moveSpeed = 3f;
-    public int damage = 10;
+    public int damage = 10;          // daño de cada ataque (lo usa EnemyMeleeAttack)
     public float spawnDelay = 0.5f;
 
     [HideInInspector] public Transform target;
@@ -42,13 +42,28 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentState == EnemyState.Chasing && target != null) MoveTowardsTarget();
+        if (target == null) return;
+
+        if (currentState == EnemyState.Chasing) MoveTowardsTarget();
+        else if (currentState == EnemyState.Attacking) rb.linearVelocity = Vector2.zero; // se planta mientras ataca
     }
 
     protected virtual void MoveTowardsTarget()
     {
         Vector2 direction = (target.position - transform.position).normalized;
         rb.linearVelocity = direction * moveSpeed;
+    }
+
+    // Lo llama EnemyMeleeAttack
+    public void BeginAttack()
+    {
+        currentState = EnemyState.Attacking;
+        rb.linearVelocity = Vector2.zero;
+    }
+
+    public void EndAttack()
+    {
+        if (currentState == EnemyState.Attacking) currentState = EnemyState.Chasing;
     }
 
     public void ApplyStun(float stunDuration, Vector2 knockbackForce)
@@ -66,19 +81,5 @@ public class EnemyAI : MonoBehaviour
 
         if (currentState == EnemyState.Stunned)
             currentState = EnemyState.Chasing;
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (currentState == EnemyState.Spawning) return;
-
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();  
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(damage);
-            }
-        }
     }
 }

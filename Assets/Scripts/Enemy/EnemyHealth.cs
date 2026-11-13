@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour
 
         currentHealth -= damageAmount;
 
-        if (currentHealth < 0) Die();
+        if (currentHealth <= 0) Die();
         else
         {
             if (ai != null) ai.ApplyStun(stunDuration,hitDirection * knockbackForce);

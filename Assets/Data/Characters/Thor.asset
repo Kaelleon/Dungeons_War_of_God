@@ -16,6 +16,7 @@ MonoBehaviour:
   characterClass: Tanque
   portrait: {fileID: 6989642852348889387, guid: 0c02c91c291763243bc4ad8a2ef21008, type: 3}
   fullBody: {fileID: -1577242008496935070, guid: 6a8add139eb7f6b4e981fbc9da8410ca, type: 3}
+  attackStyle: 0
   maxHealth: 150
   defensePercent: 25
   moveSpeedMultiplier: 0.8
@@ -28,4 +29,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 88eca17896250fd4890a84d8944c6d96, type: 2}
   gameSprite: {fileID: -1577242008496935070, guid: 6a8add139eb7f6b4e981fbc9da8410ca, type: 3}
   animatorController: {fileID: 0}
-  godPrefab: {fileID: 0}

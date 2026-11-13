@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 204758828698814571}
   - component: {fileID: 6871642153821922911}
   - component: {fileID: 1968432516335055200}
+  - component: {fileID: -717011231540010270}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -187,7 +188,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.001311779, y: 0.0013121367}
+  m_Offset: {x: -0.10131177, y: 0.0013121367}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -197,5 +198,25 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.83468246, y: 0.5985148}
+  m_Size: {x: 0.6346825, y: 0.5985148}
   m_EdgeRadius: 0
+--- !u!114 &-717011231540010270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314201959203683779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1773dd678bb9dd4aa06b7fa36d0c077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMeleeAttack
+  attackRange: 2.5
+  hitRange: 3
+  attackArc: 120
+  windupTime: 0.7
+  recoveryTime: 0.3
+  attackCooldown: 2.5
+  telegraphRenderer: {fileID: 0}
+  telegraphColor: {r: 1, g: 0.35, b: 0.35, a: 1}

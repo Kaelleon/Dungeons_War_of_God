@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7649475929130107826}
   - component: {fileID: 1683565084073283138}
   - component: {fileID: -4726130721935391572}
+  - component: {fileID: 1468709116439161964}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
@@ -201,3 +202,23 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.9457454, y: 0.55636}
   m_EdgeRadius: 0
+--- !u!114 &1468709116439161964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2846564975877068431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1773dd678bb9dd4aa06b7fa36d0c077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMeleeAttack
+  attackRange: 1.4
+  hitRange: 1.7
+  attackArc: 120
+  windupTime: 0.4
+  recoveryTime: 0.3
+  attackCooldown: 1.5
+  telegraphRenderer: {fileID: 0}
+  telegraphColor: {r: 1, g: 0.35, b: 0.35, a: 1}

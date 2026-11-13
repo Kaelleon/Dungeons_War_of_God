@@ -1,5 +1,7 @@
 using UnityEngine;
 
+public enum AttackStyle { Melee, Ranged }
+
 [CreateAssetMenu(fileName = "NewCharacter", menuName = "Game/Character Data")]
 public class CharacterData : ScriptableObject
 {
@@ -8,6 +10,9 @@ public class CharacterData : ScriptableObject
     public string characterClass;
     public Sprite portrait;   // Icono pequeño para la grilla
     public Sprite fullBody;   // Imagen grande para el centro
+
+    [Header("Attack")]
+    public AttackStyle attackStyle = AttackStyle.Melee;
 
     [Header("Stats")]
     public int maxHealth = 100;
